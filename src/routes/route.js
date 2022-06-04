@@ -1,40 +1,51 @@
 const express = require('express');
-const myHelper = require('../util/helper')
-const underscore = require('underscore')
+
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    myHelper.printDate()
-    myHelper.getCurrentMonth()
-    myHelper.getCohortData()
-    let firstElement = underscore.first(['Sabiha','Akash','Pritesh'])
-    console.log('The first element received from underscope function is '+firstElement)
-    res.send('My first ever api!')
-});
+//  router.get('/movies', function (req, res) {
 
-router.get('/hello', function (req, res) {
+//     const movies = ["rang de basanti" , "The shining", " lords of the ring" ," batman begins"]
+
+//     res.send('movies')
+
+// });
+
+router.get('/movies/:indexNumber', function (req, res) {
+
+    const movies = ["rang de basanti" , "The shining", " lords of the ring" ," batman begins"]
+     const movie = req.params.indexNumber
+    if (movie == 1){
+        return "rang de basanti"
+    }
+
+    if (movie == 2){
+        return "The shining"
+    }
+
+    if (movie == 3){
+        return "lords of the ring"
+    }
    
-    res.send('Hello there!')
+    if (movie == 4){
+        return "batman begins "
+    }
+
+    else (movie > 4)
+     return "Enter valid index number"
+
+
+    res.send('movie')
+
 });
 
-router.get('/candidates', function(req, res){
-    console.log('Query paramters for this request are '+JSON.stringify(req.query))
-    let gender = req.query.gender
-    let state = req.query.state
-    let district = req.query.district
-    console.log('State is '+state)
-    console.log('Gender is '+gender)
-    console.log('District is '+district)
-    let candidates = ['Akash','Suman']
-    res.send(candidates)
-})
 
-router.get('/candidates/:canidatesName', function(req, res){
-    console.log('The request objects is '+ JSON.stringify(req.params))
-    console.log('Candidates name is '+req.params.canidatesName)
-    res.send('Done')
-})
+
+
+
+
+
+
 
 
 module.exports = router;
